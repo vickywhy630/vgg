@@ -5,5 +5,5 @@ tensorflow==2.7.0
 Keras>=2.6.0
 Pillow==8.4.0
 tensorflow_probability==0.13.0
-keras-vggface==0.6
 keras_applications
+keras_vggface
