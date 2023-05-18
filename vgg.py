@@ -21,7 +21,7 @@ from PIL import Image
 from keras.models import load_model
 import tensorflow_probability as tfp
 import keras.utils.generic_utils as keras_utils
-from keras.utils import custom_object_scope
+#from keras.utils import custom_object_scope
 from keras_vggface import utils
 
 def pearson_correlation(y_true,y_pred):
