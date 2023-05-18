@@ -1,3 +1,10 @@
+import subprocess
+
+# Install necessary dependencies
+subprocess.run(["apt-get", "update"])
+subprocess.run(["apt-get", "install", "-y", "libgl1-mesa-glx"])
+
+
 import streamlit as st
 import cv2
 import numpy as np
