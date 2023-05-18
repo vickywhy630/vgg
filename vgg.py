@@ -32,10 +32,12 @@ model_link = 'https://drive.google.com/file/d/1qT-NHwjmkKLN9G7Wu-BbO15q8rxwl9QI/
 response = requests.get(model_link)
 model_content = response.content
 
-temp_file = tempfile.NamedTemporaryFile(delete=False)
-temp_file.write(model_content)
-temp_file.close()
+temp_dir = tempfile.mkdtemp()
 
+# Save the model content to disk
+model_path = f'{temp_dir}/model'
+with open(model_path, 'wb') as f:
+    f.write(model_content)
 
 def pearson_correlation(y_true,y_pred):
     return tfp.stats.correlation(y_true,y_pred)
@@ -46,7 +48,7 @@ def custom_object_scope(custom_objects):
 # Usage example:
 with custom_object_scope({'pearson_correlation': pearson_correlation}):
     # Your code here
-    custom_model = load_model(temp_file.name)
+    custom_model = load_model(model_path)
 # Register the custom metric function in the custom object scope
 #with custom_object_scope({'pearson_correlation': pearson_correlation}):
     # Load the model
