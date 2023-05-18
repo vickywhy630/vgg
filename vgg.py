@@ -26,6 +26,7 @@ from keras_vggface import utils
 import requests
 #import wget
 
+st.title("BMI Prediction with VGG Face")
 # Replace 'YOUR_LINK_HERE' with the actual Google Drive link
 #model_link = 'https://drive.google.com/file/d/1qT-NHwjmkKLN9G7Wu-BbO15q8rxwl9QI/view?usp=share_link'
 #response = requests.get(model_link)
