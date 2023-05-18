@@ -20,16 +20,24 @@ from tensorflow.keras.layers import GlobalAveragePooling2D
 from PIL import Image
 from keras.models import load_model
 import tensorflow_probability as tfp
+import keras.utils.generic_utils as keras_utils
 from keras.utils import custom_object_scope
 from keras_vggface import utils
 
 def pearson_correlation(y_true,y_pred):
     return tfp.stats.correlation(y_true,y_pred)
 
-# Register the custom metric function in the custom object scope
+def custom_object_scope(custom_objects):
+    return keras_utils.CustomObjectScope(custom_objects)
+
+# Usage example:
 with custom_object_scope({'pearson_correlation': pearson_correlation}):
-    # Load the model
+    # Your code here
     custom_model = load_model('vgg_model.h5')
+# Register the custom metric function in the custom object scope
+#with custom_object_scope({'pearson_correlation': pearson_correlation}):
+    # Load the model
+    #custom_model = load_model('vgg_model.h5')
 #vmodel = VGGFace(model='resnet50', include_top=False, input_shape=(224, 224, 3), pooling='avg')
 #last_layer = vmodel.get_layer('global_average_pooling2d').output
 #x = Flatten(name='flatten')(last_layer)
