@@ -23,6 +23,18 @@ import tensorflow_probability as tfp
 import keras.utils.generic_utils as keras_utils
 #from keras.utils import custom_object_scope
 from keras_vggface import utils
+import requests
+
+# Replace 'YOUR_LINK_HERE' with the actual Google Drive link
+model_link = 'https://drive.google.com/file/d/1qT-NHwjmkKLN9G7Wu-BbO15q8rxwl9QI/view?usp=share_link'
+
+# Define the path where the model will be saved
+model_path = 'models/vgg_model.h5'
+
+# Download the model file
+response = requests.get(model_link)
+with open(model_path, 'wb') as f:
+    f.write(response.content)
 
 def pearson_correlation(y_true,y_pred):
     return tfp.stats.correlation(y_true,y_pred)
@@ -33,7 +45,7 @@ def custom_object_scope(custom_objects):
 # Usage example:
 with custom_object_scope({'pearson_correlation': pearson_correlation}):
     # Your code here
-    custom_model = load_model('vgg_model.h5')
+    custom_model = load_model(model_path)
 # Register the custom metric function in the custom object scope
 #with custom_object_scope({'pearson_correlation': pearson_correlation}):
     # Load the model
