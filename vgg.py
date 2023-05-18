@@ -24,20 +24,19 @@ import keras.utils.generic_utils as keras_utils
 #from keras.utils import custom_object_scope
 from keras_vggface import utils
 import requests
-import tempfile
-import io
+import wget
 
 # Replace 'YOUR_LINK_HERE' with the actual Google Drive link
 model_link = 'https://drive.google.com/file/d/1qT-NHwjmkKLN9G7Wu-BbO15q8rxwl9QI/view?usp=share_link'
-response = requests.get(model_link)
-model_content = response.content
+#response = requests.get(model_link)
+#model_content = response.content
 
-temp_dir = tempfile.mkdtemp()
+# Define the output path to save the model file
+output_path = 'model.h5'
 
-# Save the model content to disk
-model_path = f'{temp_dir}/model'
-with open(model_path, 'wb') as f:
-    f.write(model_content)
+# Download the model file
+# Download the model file
+wget.download(model_link, output_path)
 
 def pearson_correlation(y_true,y_pred):
     return tfp.stats.correlation(y_true,y_pred)
@@ -48,7 +47,7 @@ def custom_object_scope(custom_objects):
 # Usage example:
 with custom_object_scope({'pearson_correlation': pearson_correlation}):
     # Your code here
-    custom_model = load_model(model_path)
+    custom_model = load_model(output_path)
 # Register the custom metric function in the custom object scope
 #with custom_object_scope({'pearson_correlation': pearson_correlation}):
     # Load the model
