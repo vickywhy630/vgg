@@ -19,58 +19,33 @@ import numpy as np
 
 st.title("VGGFace Face Recognition")
 
-# File uploader
-uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
+def main():
+	'''Set main() function. Includes sidebar navigation and respective routing.'''
 
-vggface_model = VGGFace(model='resnet50', include_top=False, input_shape=(224, 224, 3),pooling='avg')
+	st.sidebar.title("Explore")
+	app_mode = st.sidebar.selectbox( "Choose an Action", [
+		"Camera",
+		"Upload a Photo"
+	])
 
-def preprocess_image(image):
-    image = image.resize((224, 224))  # Resize the image to match the input size of VGGFace
-    image = image.convert('RGB')  # Convert image to RGB format if necessary
-    #image = preprocess_input(np.array(image))  # Preprocess the image
-    image = np.array(image).astype('float64')  # Convert image to array of float64 data type
-    image = preprocess_input(image) 
-    return image
+	# clear tmp
+	clear_tmp()
 
-# Function to recognize faces in the image
-def recognize_faces(image):
-    #image = preprocess_image(image)
-    #embeddings = vggface_model.predict(np.expand_dims(image, axis=0))
-    # Perform face recognition tasks using the embeddings
-    # Implement your own logic here, such as comparing embeddings with a database of known faces
-    #img = np.expand_dims(image, axis=0)
-    #img= utils.preprocess_input(img, version=1) # or version=2
-    embeddings = vggface_model.predict(np.expand_dims(image, axis=0))
-    #preds = vggface_model.predict(img)
-    #print(preds)
+	# nav
+	if   app_mode == "Camera":              show_about()
+	elif app_mode == "Upload a Photo":  explore_classified()
+	
+    def show_about():
+        st.title('Learning to Listen, to Feel')
+        for line in read_text(path('about.txt')):
+            st.write(line)
+            
+    def explore_classified():
+        df = load_data()
+        non_label_cols = ['track_id', 'track_title', 'artist_name', 'track_popularity', 'artist_popularity']
+        dims = [c for c in df.columns.tolist() if c not in non_label_cols]
+
+
+
     
-def predict_bmi(embeddings):
-    bmi = embeddings[0][0]
-    #if bmi < 18.5:
-        #category = 'Underweight'
-    #elif bmi < 24.9:
-        #category = 'Normal weight'
-    #elif bmi < 29.9:
-        #category = 'Overweight'
-    #elif bmi < 34.9:
-        #category = 'Moderately Obese'
-    #else:
-        #category = 'Severely Obese'
-    
-    st.write(f"BMI: {bmi:.2f}")
-    #st.write(f"Category: {category}")
 
-
-if uploaded_file is not None:
-    # Display the uploaded image
-    image = Image.open(uploaded_file)
-    st.image(image, caption='Uploaded Image', use_column_width=True)
-
-    # Recognize faces
-    if st.button('Recognize Faces'):
-        #recognize_faces(image)
-        # Display the results or perform additional actions
-        image = preprocess_image(image)
-        recognize_faces(image)
-        embeddings = vggface_model.predict(np.expand_dims(image, axis=0))
-        predict_bmi(embeddings)
