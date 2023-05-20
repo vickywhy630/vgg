@@ -83,8 +83,7 @@ def main():
 	if   app_mode == "Camera":              camera()
 	elif app_mode == "Upload a Photo":  upload()
 	
-    def camera():
-	
+def camera():
 	img_file_buffer = st.camera_input("Take a picture")
 	
 	if img_file_buffer is not None:
@@ -106,7 +105,7 @@ def main():
 		
 		st.write(f"BMI: {bmi:.2f}")
 
-    def upload():
+def upload():
 	uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
 	if uploaded_file is not None:
 		image = Image.open(uploaded_file)
