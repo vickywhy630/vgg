@@ -68,7 +68,7 @@ def recognize_faces(image):
     #preds = vggface_model.predict(img)
 
 with st.sidebar:
-    choose = option_menu("Explore", ["WebCam", "Upload a Photo"],
+    choose = option_menu("App Gallery", ["WebCam", "Upload a Photo"],
                          icons=['camera fill','person lines fill'],
                          menu_icon="app-indicator", default_index=0,
                          styles={
@@ -100,27 +100,28 @@ if choose == "WebCam":
 		# Extract the BMI value from the embeddings
 		bmi = embeddings[0][0]
 		
-		st.write(f"BMI: {bmi:.2f}")
+		st.metric(label="BMI", value=bmi)
 
 elif choose == "Upload a Photo":
 	uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
 	if uploaded_file is not None:
-		image = Image.open(uploaded_file)
-		st.image(image, caption='Uploaded Image', use_column_width=True)
+		image2 = Image.open(uploaded_file)
+		st.image(image2, caption='Uploaded Image', use_column_width=True)
 		
 		if st.button('Recognize Faces'):
 			#recognize_faces(image)
 			# Display the results or perform additional actions
-			preprocessed_img2 = preprocess_image(image)
+			preprocessed_img2 = preprocess_image(image2)
 			preprocessed_img2 = np.expand_dims(preprocessed_img2, axis=0)
 			preprocessed_img2 = utils.preprocess_input(preprocessed_img2, version=2)
 			# Extract the embeddings using the VGGFace model
-			recognize_faces(image)
+			recognize_faces(image2)
 			embeddings2 = custom_model.predict(preprocessed_img2)
 			# Extract the BMI value from the embeddings
 			bmi = embeddings2[0][0]
 			
-			st.write(f"BMI: {bmi:.2f}")
+			#st.write(f"BMI: {bmi:.2f}")
+			st.metric(label="BMI", value=bmi)
 
 
 
