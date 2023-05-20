@@ -80,8 +80,8 @@ def main():
 	#clear_tmp()
 
 	# nav
-	if   app_mode == "Camera":              camera()
-	else app_mode == "Upload a Photo":  upload()
+	if   app_mode == "Camera":          camera()
+	elif app_mode == "Upload a Photo":  upload()
 		
 		
 @st.cache(show_spinner = False)
