@@ -105,12 +105,18 @@ def main():
 		st.image(image, caption='Uploaded Image', use_column_width=True)
 		
 		if st.button('Recognize Faces'):
-        #recognize_faces(image)
-        # Display the results or perform additional actions
-        image = preprocess_image(image)
-        recognize_faces(image)
-        embeddings = vggface_model.predict(np.expand_dims(image, axis=0))
-        predict_bmi(embeddings)
+			#recognize_faces(image)
+			# Display the results or perform additional actions
+			preprocessed_img2 = preprocess_image(image)
+			preprocessed_img2 = np.expand_dims(preprocessed_img2, axis=0)
+			preprocessed_img2 = utils.preprocess_input(preprocessed_img2, version=2)
+			# Extract the embeddings using the VGGFace model
+			
+			embeddings2 = custom_model.predict(preprocessed_img2)
+			# Extract the BMI value from the embeddings
+			bmi = embeddings2[0][0]
+			
+			st.write(f"BMI: {bmi:.2f}")
 
 
 
