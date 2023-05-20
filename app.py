@@ -1,21 +1,29 @@
+import subprocess
+
+# Install necessary dependencies
+subprocess.run(["apt-get", "update"])
+subprocess.run(["apt-get", "install", "-y", "libgl1-mesa-glx"])
+
+filename = "/home/appuser/venv/lib/python3.9/site-packages/keras_vggface/models.py"
+text = open(filename).read()
+open(filename, "w+").write(text.replace('keras.engine.topology', 'tensorflow.keras.utils'))
+
 import streamlit as st
-import tensorflow as tf
-from mtcnn.mtcnn import MTCNN
-import streamlit as st
-import matplotlib.pyplot as plt 
-from matplotlib.patches import Rectangle
-from matplotlib.patches import Circle
-from PIL import Image
-from numpy import asarray
-from scipy.spatial.distance import cosine
-from keras_vggface.vggface import VGGFace
-from keras_vggface import utils
-from keras_vggface.utils import preprocess_input
-from tensorflow.keras.applications.imagenet_utils import decode_predictions
 import cv2
-from PIL import Image, ImageOps
-from tensorflow.keras.preprocessing import image
 import numpy as np
+import tensorflow as tf
+from keras.models import Model
+from keras_vggface.vggface import VGGFace
+from keras_vggface.utils import preprocess_input
+from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense
+from tensorflow.keras.layers import GlobalAveragePooling2D
+from PIL import Image
+from keras.models import load_model
+import tensorflow_probability as tfp
+import keras.utils.generic_utils as keras_utils
+#from keras.utils import custom_object_scope
+from keras_vggface import utils
+import requests
 
 st.title("VGGFace Face Recognition")
 
