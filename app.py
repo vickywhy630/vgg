@@ -99,9 +99,7 @@ def main():
 		st.write(f"BMI: {bmi:.2f}")
 
     def upload():
-        df = load_data()
-        non_label_cols = ['track_id', 'track_title', 'artist_name', 'track_popularity', 'artist_popularity']
-        dims = [c for c in df.columns.tolist() if c not in non_label_cols]
+	uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
 
 
 
