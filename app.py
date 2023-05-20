@@ -56,7 +56,15 @@ def preprocess_image(image):
     #image = preprocess_input(image)
     return image
 
-
+def recognize_faces(image):
+    #image = preprocess_image(image)
+    #embeddings = vggface_model.predict(np.expand_dims(image, axis=0))
+    # Perform face recognition tasks using the embeddings
+    # Implement your own logic here, such as comparing embeddings with a database of known faces
+    #img = np.expand_dims(image, axis=0)
+    #img= utils.preprocess_input(img, version=1) # or version=2
+    embeddings2 = custom_model.predict(preprocessed_img2)
+    #preds = vggface_model.predict(img)
 
 
 def main():
