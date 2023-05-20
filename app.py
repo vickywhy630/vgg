@@ -57,6 +57,14 @@ def preprocess_image(image):
     #image = preprocess_input(image)
     return image
 
+def preprocess_image2(image):
+    image = image.resize((224, 224))  # Resize the image to match the input size of VGGFace
+    image = image.convert('RGB')  # Convert image to RGB format if necessary
+    #image = preprocess_input(np.array(image))  # Preprocess the image
+    image = np.array(image).astype('float64')  # Convert image to array of float64 data type
+    image = preprocess_input(image) 
+    return image
+
 def recognize_faces(image):
     #image = preprocess_image(image)
     #embeddings = vggface_model.predict(np.expand_dims(image, axis=0))
@@ -111,7 +119,7 @@ elif choose == "Upload a Photo":
 		if st.button('Recognize Faces'):
 			#recognize_faces(image)
 			# Display the results or perform additional actions
-			preprocessed_img2 = preprocess_image(image2)
+			preprocessed_img2 = preprocess_image2(image2)
 			preprocessed_img2 = np.expand_dims(preprocessed_img2, axis=0)
 			preprocessed_img2 = utils.preprocess_input(preprocessed_img2, version=2)
 			# Extract the embeddings using the VGGFace model
