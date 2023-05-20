@@ -100,6 +100,17 @@ def main():
 
     def upload():
 	uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
+	if uploaded_file is not None:
+		image = Image.open(uploaded_file)
+		st.image(image, caption='Uploaded Image', use_column_width=True)
+		
+		if st.button('Recognize Faces'):
+        #recognize_faces(image)
+        # Display the results or perform additional actions
+        image = preprocess_image(image)
+        recognize_faces(image)
+        embeddings = vggface_model.predict(np.expand_dims(image, axis=0))
+        predict_bmi(embeddings)
 
 
 
