@@ -32,15 +32,31 @@ def main():
 	#clear_tmp()
 
 	# nav
-	if   app_mode == "Camera":              show_about()
-	elif app_mode == "Upload a Photo":  explore_classified()
+	if   app_mode == "Camera":              camera()
+	elif app_mode == "Upload a Photo":  upload()
 	
-    def show_about():
-        st.title('Learning to Listen, to Feel')
-        for line in read_text(path('about.txt')):
-            st.write(line)
-            
-    def explore_classified():
+    def camera():
+	
+	img_file_buffer = st.camera_input("Take a picture")
+	
+	if img_file_buffer is not None:
+		# To read image file buffer with OpenCV:
+		bytes_data = img_file_buffer.getvalue()
+		cv2_img = cv2.imdecode(np.frombuffer(bytes_data, np.uint8), cv2.IMREAD_COLOR)
+		# Preprocess the image
+		preprocessed_img = preprocess_image(cv2_img)
+		
+		# Reshape the preprocessed image to match the input shape of VGGFace
+		preprocessed_img = np.expand_dims(preprocessed_img, axis=0)
+		preprocessed_img = utils.preprocess_input(preprocessed_img, version=2)
+		
+		# Extract the embeddings using the VGGFace model
+		embeddings = custom_model.predict(preprocessed_img)
+		
+		# Extract the BMI value from the embeddings
+		bmi = embeddings[0][0]
+
+    def upload():
         df = load_data()
         non_label_cols = ['track_id', 'track_title', 'artist_name', 'track_popularity', 'artist_popularity']
         dims = [c for c in df.columns.tolist() if c not in non_label_cols]
