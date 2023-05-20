@@ -12,6 +12,7 @@ import streamlit as st
 import cv2
 import numpy as np
 import tensorflow as tf
+from streamlit_option_menu import option_menu
 from keras.models import Model
 from keras_vggface.vggface import VGGFace
 from keras_vggface.utils import preprocess_input
