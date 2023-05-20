@@ -19,6 +19,38 @@ import numpy as np
 
 st.title("VGGFace Face Recognition")
 
+def pearson_correlation(y_true,y_pred):
+    return tfp.stats.correlation(y_true,y_pred)
+
+def custom_object_scope(custom_objects):
+    return keras_utils.CustomObjectScope(custom_objects)
+
+# Usage example:
+with custom_object_scope({'pearson_correlation': pearson_correlation}):
+    # Your code here
+    custom_model = load_model('vgg_model.h5')
+# Register the custom metric function in the custom object scope
+#with custom_object_scope({'pearson_correlation': pearson_correlation}):
+    # Load the model
+    #custom_model = load_model('vgg_model.h5')
+#vmodel = VGGFace(model='resnet50', include_top=False, input_shape=(224, 224, 3), pooling='avg')
+#last_layer = vmodel.get_layer('global_average_pooling2d').output
+#x = Flatten(name='flatten')(last_layer)
+#x = Dense(512, activation='relu', name='fc6')(x)
+#output_layer = Dense(1, activation='linear')(x)
+#custom_model = Model(vmodel.input, output_layer)
+#custom_model = load_model('vgg_model.h5')
+
+def preprocess_image(image):
+    image = cv2.resize(image, (224, 224))  # Resize the image to match the input size of VGGFace
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)  # Convert image to RGB format
+    image = np.array(image).astype('float64')  # Convert image to array
+    #image = preprocess_input(image)
+    return image
+
+
+
+
 def main():
 	'''Set main() function. Includes sidebar navigation and respective routing.'''
 
