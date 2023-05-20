@@ -1,5 +1,6 @@
 
 
+from streamlit_webrtc import webrtc_streamer, WebRtcMode, RTCConfiguration
 
 
 class VideoProcessor:
