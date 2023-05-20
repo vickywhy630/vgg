@@ -9,3 +9,4 @@ tensorflow_probability==0.13.0
 keras_applications
 keras_vggface
 streamlit-option-menu
+streamlit-webrtc
