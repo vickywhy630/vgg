@@ -81,8 +81,10 @@ def main():
 
 	# nav
 	if   app_mode == "Camera":              camera()
-	elif app_mode == "Upload a Photo":  upload()
-	
+	else app_mode == "Upload a Photo":  upload()
+		
+		
+@st.cache(show_spinner = False)
 def camera():
 	img_file_buffer = st.camera_input("Take a picture")
 	
