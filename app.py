@@ -119,7 +119,7 @@ def main():
 			preprocessed_img2 = np.expand_dims(preprocessed_img2, axis=0)
 			preprocessed_img2 = utils.preprocess_input(preprocessed_img2, version=2)
 			# Extract the embeddings using the VGGFace model
-			
+			recognize_faces(image)
 			embeddings2 = custom_model.predict(preprocessed_img2)
 			# Extract the BMI value from the embeddings
 			bmi = embeddings2[0][0]
