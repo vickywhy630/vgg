@@ -29,7 +29,7 @@ def main():
 	])
 
 	# clear tmp
-	clear_tmp()
+	#clear_tmp()
 
 	# nav
 	if   app_mode == "Camera":              show_about()
