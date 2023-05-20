@@ -66,26 +66,20 @@ def recognize_faces(image):
     embeddings2 = custom_model.predict(preprocessed_img2)
     #preds = vggface_model.predict(img)
 
-
-def main():
-	'''Set main() function. Includes sidebar navigation and respective routing.'''
-
-	st.sidebar.title("Explore")
-	app_mode = st.sidebar.selectbox( "Choose an Action", [
-		"Camera",
-		"Upload a Photo"
-	])
-
-	# clear tmp
-	#clear_tmp()
-
-	# nav
-	if   app_mode == "Camera":          camera()
-	elif app_mode == "Upload a Photo":  upload()
+with st.sidebar:
+    choose = option_menu("Explore", ["WebCam", "Upload a Photo"],
+                         icons=['camera fill','person lines fill'],
+                         menu_icon="app-indicator", default_index=0,
+                         styles={
+        "container": {"padding": "5!important", "background-color": "#fafafa"},
+        "icon": {"color": "orange", "font-size": "25px"}, 
+        "nav-link": {"font-size": "16px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
+        "nav-link-selected": {"background-color": "#02ab21"},
+    }
+    )
 		
 		
-@st.cache(show_spinner = False)
-def camera():
+if choose == "WebCam":
 	img_file_buffer = st.camera_input("Take a picture")
 	
 	if img_file_buffer is not None:
@@ -107,7 +101,7 @@ def camera():
 		
 		st.write(f"BMI: {bmi:.2f}")
 
-def upload():
+elif choose == "Upload a Photo":
 	uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
 	if uploaded_file is not None:
 		image = Image.open(uploaded_file)
