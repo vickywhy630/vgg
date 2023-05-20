@@ -13,6 +13,7 @@ import cv2
 import numpy as np
 import tensorflow as tf
 from streamlit_option_menu import option_menu
+from streamlit_webrtc import webrtc_streamer
 from keras.models import Model
 from keras_vggface.vggface import VGGFace
 from keras_vggface.utils import preprocess_input
@@ -76,8 +77,8 @@ def recognize_faces(image):
     #preds = vggface_model.predict(img)
 
 with st.sidebar:
-    choose = option_menu("App Gallery", ["WebCam", "Upload a Photo"],
-                         icons=['camera fill','person lines fill'],
+    choose = option_menu("App Gallery", ["Camera", "Upload a Photo","Real-time BMI Monitoring"],
+                         icons=['camera fill','person lines fill',"camera video"],
                          menu_icon="app-indicator", default_index=0,
                          styles={
         "container": {"padding": "5!important", "background-color": "#fafafa"},
@@ -130,6 +131,9 @@ elif choose == "Upload a Photo":
 			
 			#st.write(f"BMI: {bmi:.2f}")
 			st.metric(label="BMI", value=bmi)
+			
+elif choose == "Real-time BMI Monitoring":
+	webrtc_streamer(key="example")
 
 
 
