@@ -95,6 +95,8 @@ def main():
 		
 		# Extract the BMI value from the embeddings
 		bmi = embeddings[0][0]
+		
+		st.write(f"BMI: {bmi:.2f}")
 
     def upload():
         df = load_data()
