@@ -149,7 +149,8 @@ elif choose == "Real-time BMI Monitoring":
 		key="WYH",
 		mode=WebRtcMode.SENDRECV,
 		rtc_configuration=RTC_CONFIGURATION,
-		video_processor_factory=VideoProcessor,
+		video_processor_factory=VideoProcessor,\
+		media_stream_constraints={"video": True, "audio": False},
 		async_processing=True)
 
 
