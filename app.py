@@ -28,7 +28,7 @@ import keras.utils.generic_utils as keras_utils
 from keras_vggface import utils
 import requests
 
-st.title("VGGFace Face Recognition")
+st.title("BMI Prediction using VGG Face")
 
 def pearson_correlation(y_true,y_pred):
     return tfp.stats.correlation(y_true,y_pred)
