@@ -10,4 +10,4 @@ keras_applications
 keras_vggface
 streamlit-option-menu
 streamlit-webrtc
-twilio~=8.1.0
+pandas
