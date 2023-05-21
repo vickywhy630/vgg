@@ -140,7 +140,7 @@ elif choose == "Upload a Photo":
 	use_default_image = st.checkbox('Use default image')
 	
 	if use_default_image:
-		opencv_image = Image.open('img_0.jpg')
+		opencv_image = cv2.imread('img_0.jpg')
 		st.image(opencv_image, caption='Default Image', use_column_width=True)
 		if st.button('Recognize Faces'):
 			preprocessed_img3 = preprocess_image(opencv_image)
