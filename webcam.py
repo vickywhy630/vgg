@@ -27,6 +27,7 @@ import keras.utils.generic_utils as keras_utils
 from keras_vggface import utils
 import requests
 import av
+import asyncio
 from turn import get_ice_servers
 from streamlit_webrtc import webrtc_streamer, WebRtcMode, VideoTransformerBase
 import threading
