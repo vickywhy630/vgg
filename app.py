@@ -127,6 +127,19 @@ elif choose == "Upload a Photo":
 	
 	if use_default_image:
 		opencv_image = cv2.imread('img_0.jpg')
+		if st.button('Recognize Faces'):
+			preprocessed_img3 = preprocess_image2(opencv_image)
+			preprocessed_img3 = np.expand_dims(preprocessed_img3, axis=0)
+			preprocessed_img3 = utils.preprocess_input(preprocessed_img3, version=2)
+			# Extract the embeddings using the VGGFace model
+			#recognize_faces(image3)
+			embeddings3 = custom_model.predict(preprocessed_img3)
+			# Extract the BMI value from the embeddings
+			bmi = embeddings3[0][0]
+			
+			#st.write(f"BMI: {bmi:.2f}")
+			st.metric(label="BMI", value=bmi)
+			
 	
 	elif uploaded_file is not None:
 		image2 = Image.open(uploaded_file)
@@ -139,7 +152,7 @@ elif choose == "Upload a Photo":
 			preprocessed_img2 = np.expand_dims(preprocessed_img2, axis=0)
 			preprocessed_img2 = utils.preprocess_input(preprocessed_img2, version=2)
 			# Extract the embeddings using the VGGFace model
-			recognize_faces(image2)
+			#recognize_faces(image2)
 			embeddings2 = custom_model.predict(preprocessed_img2)
 			# Extract the BMI value from the embeddings
 			bmi = embeddings2[0][0]
