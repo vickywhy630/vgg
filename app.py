@@ -112,6 +112,20 @@ if choose == "Camera":
 		bmi = embeddings[0][0]
 		
 		st.metric(label="BMI", value=bmi)
+		
+	df = pd.DataFrame(
+		[
+			{"BMI": "16-18.5", "rating": "Underweight"},
+			{"BMI": "18.5-25", "rating": "Normal"},
+			{"BMI": "25-30", "rating": "Overweight"},
+			{"BMI": "30-35", "rating": "Moderately obese"},
+			{"BMI": "35-40 & >40", "rating": "Severely obse"},
+		]
+	)
+		
+	st.dataframe(df, use_container_width=True)
+		
+		
 
 elif choose == "Upload a Photo":
 	col1, col2 = st.columns( [0.8, 0.2])
@@ -126,11 +140,12 @@ elif choose == "Upload a Photo":
 	use_default_image = st.checkbox('Use default image')
 	
 	if use_default_image:
-		opencv_image = cv2.imread('img_0.jpg')
+		opencv_image = Image.open('img_0.jpg')
+		st.image(opencv_image, caption='Default Image', use_column_width=True)
 		if st.button('Recognize Faces'):
 			preprocessed_img3 = preprocess_image2(opencv_image)
 			preprocessed_img3 = np.expand_dims(preprocessed_img3, axis=0)
-			preprocessed_img3 = utils.preprocess_input(preprocessed_img3, version=2)
+			#preprocessed_img3 = utils.preprocess_input(preprocessed_img3, version=2)
 			# Extract the embeddings using the VGGFace model
 			#recognize_faces(image3)
 			embeddings3 = custom_model.predict(preprocessed_img3)
