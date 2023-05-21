@@ -1,3 +1,14 @@
+import subprocess
+
+# Install necessary dependencies
+subprocess.run(["apt-get", "update"])
+subprocess.run(["apt-get", "install", "-y", "libgl1-mesa-glx"])
+
+filename = "/home/appuser/venv/lib/python3.9/site-packages/keras_vggface/models.py"
+text = open(filename).read()
+open(filename, "w+").write(text.replace('keras.engine.topology', 'tensorflow.keras.utils'))
+
+
 import streamlit as st
 import cv2
 import numpy as np
