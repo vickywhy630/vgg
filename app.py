@@ -148,11 +148,11 @@ elif choose == "Upload a Photo":
 			
 	df = pd.DataFrame(
 		[
-			{"BMI": "16-18.5", "rating": underweight},
-			{"BMI": "18.5-25", "rating": normal},
-			{"BMI": "25-30", "rating": overweight},
-			{"BMI": "30-35", "rating": moderately obese},
-			{"BMI": "35-40 & >40", "rating": severely obse},
+			{"BMI": "16-18.5", "rating": "Underweight"},
+			{"BMI": "18.5-25", "rating": "Normal"},
+			{"BMI": "25-30", "rating": "Overweight"},
+			{"BMI": "30-35", "rating": "Moderately obese"},
+			{"BMI": "35-40 & >40", "rating": "Severely obse"},
 		]
 	)
 		
