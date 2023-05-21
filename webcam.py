@@ -7,6 +7,18 @@ from streamlit_webrtc import webrtc_streamer, WebRtcMode, VideoTransformerBase
         #img = frame.to_ndarray(format="bgr24")
         #img = process(img)
         #return av.VideoFrame.from_ndarray(img, format="bgr24")
+	
+def pearson_correlation(y_true,y_pred):
+    return tfp.stats.correlation(y_true,y_pred)
+
+def custom_object_scope(custom_objects):
+    return keras_utils.CustomObjectScope(custom_objects)
+
+# Usage example:
+with custom_object_scope({'pearson_correlation': pearson_correlation}):
+    # Your code here
+    custom_model = load_model('vgg_model.h5')
+
         
 def preprocess_image(image):
     image = cv2.resize(image, (224, 224))  # Resize the image to match the input size of VGGFace
