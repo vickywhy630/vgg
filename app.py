@@ -78,7 +78,7 @@ def recognize_faces(image):
 	
 	
 with st.sidebar:
-    choose = option_menu("App Gallery", ["Camera", "Upload a Photo","Real-time BMI Monitoring"],
+    choose = option_menu("App Gallery", ["Camera", "Upload a Photo","BMI Chart"],
                          icons=['camera fill','person lines fill',"camera video"],
                          menu_icon="app-indicator", default_index=0,
                          styles={
