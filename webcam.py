@@ -55,9 +55,9 @@ def predict_bmi(frame):
         image = frame[y:y+h, x:x+w]
         preprocessed_img= preprocess_image(image)
         preprocessed_img = np.expand_dims(preprocessed_img, axis=0)
-		preprocessed_img = utils.preprocess_input(preprocessed_img, version=2)
-		# Extract the embeddings using the VGGFace model
-		embeddings = custom_model.predict(preprocessed_img)
+	preprocessed_img = utils.preprocess_input(preprocessed_img, version=2)
+	# Extract the embeddings using the VGGFace model
+	embeddings = custom_model.predict(preprocessed_img)
         pred_bmi.append(embeddings[0][0])
         cv2.putText(frame, f'BMI: {preds}', (x+5, y-5), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
     return pred_bmi, frame
