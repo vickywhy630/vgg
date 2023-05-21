@@ -78,8 +78,8 @@ def recognize_faces(image):
 	
 	
 with st.sidebar:
-    choose = option_menu("App Gallery", ["Camera", "Upload a Photo","BMI Chart"],
-                         icons=['camera fill','person lines fill',"camera video"],
+    choose = option_menu("App Gallery", ["Camera", "Upload a Photo"],
+                         icons=['camera fill','person lines fill'],
                          menu_icon="app-indicator", default_index=0,
                          styles={
         "container": {"padding": "5!important", "background-color": "#fafafa"},
@@ -113,8 +113,21 @@ if choose == "Camera":
 		st.metric(label="BMI", value=bmi)
 
 elif choose == "Upload a Photo":
+	col1, col2 = st.columns( [0.8, 0.2])
+	with col1:
+		st.markdown(""" <style> .font {
+		font-size:35px ; font-family: 'Cooper Black'; color: #FF9633;} 
+		</style> """, unsafe_allow_html=True)
+		st.markdown('<p class="font">Upload your photo here...</p>', unsafe_allow_html=True)
+	
 	uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
-	if uploaded_file is not None:
+	st.write('Or')
+	use_default_image = st.checkbox('Use default image')
+	
+	if use_default_image:
+		opencv_image = cv2.imread('img_0.jpg')
+	
+	elif uploaded_file is not None:
 		image2 = Image.open(uploaded_file)
 		st.image(image2, caption='Uploaded Image', use_column_width=True)
 		
@@ -133,6 +146,17 @@ elif choose == "Upload a Photo":
 			#st.write(f"BMI: {bmi:.2f}")
 			st.metric(label="BMI", value=bmi)
 			
+	df = pd.DataFrame(
+		[
+			{"BMI": "16-18.5", "rating": underweight},
+			{"BMI": "18.5-25", "rating": normal},
+			{"BMI": "25-30", "rating": overweight},
+			{"BMI": "30-35", "rating": moderately obese},
+			{"BMI": "35-40 & >40", "rating": severely obse},
+		]
+	)
+		
+	st.dataframe(df, use_container_width=True)
 
 
 
