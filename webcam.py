@@ -25,9 +25,9 @@ from streamlit_webrtc import webrtc_streamer, WebRtcMode, RTCConfiguration
 
 
 
-#RTC_CONFIGURATION = RTCConfiguration({"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]})
+RTC_CONFIGURATION = RTCConfiguration({"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]})
 
 #webrtc_ctx = webrtc_streamer(key="WYH",mode=WebRtcMode.SENDRECV,rtc_configuration=RTC_CONFIGURATION,video_processor_factory=VideoProcessor,\media_stream_constraints={"video": True, "audio": False},async_processing=True)
 
-webrtc_streamer(key="example",rtc_configuration={'iceServers': get_ice_servers()},sendback_audio=False)
+webrtc_streamer(key="example",rtc_configuration=RTC_CONFIGURATION,sendback_audio=False)
   
