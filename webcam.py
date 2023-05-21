@@ -1,5 +1,5 @@
-
-
+import av
+from sample_utils.turn import get_ice_servers
 from streamlit_webrtc import webrtc_streamer, WebRtcMode, VideoTransformerBase
 
 class VideoProcessor:
@@ -28,5 +28,5 @@ class VideoProcessor:
 
 #webrtc_ctx = webrtc_streamer(key="WYH",mode=WebRtcMode.SENDRECV,rtc_configuration=RTC_CONFIGURATION,video_processor_factory=VideoProcessor,\media_stream_constraints={"video": True, "audio": False},async_processing=True)
 
-webrtc_streamer(key="example",video_processor_factory=VideoProcessor,sendback_audio=False)
+webrtc_streamer(key="example",video_processor_factory=VideoProcessor,rtc_configuration={"iceServers": get_ice_servers()},sendback_audio=False)
   
