@@ -26,31 +26,30 @@ from streamlit_webrtc import webrtc_streamer, WebRtcMode, VideoTransformerBase
         #return av.VideoFrame.from_ndarray(img, format="bgr24")
 	
 def pearson_correlation(y_true,y_pred):
-    return tfp.stats.correlation(y_true,y_pred)
+	return tfp.stats.correlation(y_true,y_pred)
 
 def custom_object_scope(custom_objects):
-    return keras_utils.CustomObjectScope(custom_objects)
+	return keras_utils.CustomObjectScope(custom_objects)
 
 # Usage example:
 with custom_object_scope({'pearson_correlation': pearson_correlation}):
-    # Your code here
-    custom_model = load_model('vgg_model.h5')
+	custom_model = load_model('vgg_model.h5')
 
         
 def preprocess_image(image):
-    image = cv2.resize(image, (224, 224))  # Resize the image to match the input size of VGGFace
-    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)  # Convert image to RGB format
-    image = np.array(image).astype('float64')  # Convert image to array
-    #image = preprocess_input(image)
-    return image
+	image = cv2.resize(image, (224, 224))  # Resize the image to match the input size of VGGFace
+	image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)  # Convert image to RGB format
+	image = np.array(image).astype('float64')  # Convert image to array
+	#image = preprocess_input(image)
+	return image
         
         
 faceCascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
         
 def predict_bmi(frame):
-    pred_bmi = []
+	pred_bmi = []
     faces = faceCascade.detectMultiScale(cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY), scaleFactor = 1.15,minNeighbors = 5,minSize = (30,30))
-    for (x, y, w, h) in faces:
+for (x, y, w, h) in faces:
 	cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 0, 255), 2)
         image = frame[y:y+h, x:x+w]
         preprocessed_img= preprocess_image(image)
