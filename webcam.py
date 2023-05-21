@@ -24,10 +24,12 @@ def predict_bmi(frame):
     for (x, y, w, h) in faces:
         cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 0, 255), 2)
         image = frame[y:y+h, x:x+w]
-        img = preprocess_image(image)
-        features = get_fc6_feature(img)
-        preds = svr_model.predict(features)
-        pred_bmi.append(preds[0])
+        preprocessed_img= preprocess_image(image)
+        preprocessed_img = np.expand_dims(preprocessed_img, axis=0)
+		preprocessed_img = utils.preprocess_input(preprocessed_img, version=2)
+		# Extract the embeddings using the VGGFace model
+		embeddings = custom_model.predict(preprocessed_img)
+        pred_bmi.append(embeddings[0][0])
         cv2.putText(frame, f'BMI: {preds}', (x+5, y-5), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
     return pred_bmi, frame
  
