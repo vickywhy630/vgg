@@ -119,7 +119,7 @@ if choose == "Camera":
 			{"BMI": "18.5-25", "rating": "Normal"},
 			{"BMI": "25-30", "rating": "Overweight"},
 			{"BMI": "30-35", "rating": "Moderately obese"},
-			{"BMI": "35-40 & >40", "rating": "Severely obse"},
+			{"BMI": "35-40 & >40", "rating": "Severely obese"},
 		]
 	)
 		
@@ -181,7 +181,7 @@ elif choose == "Upload a Photo":
 			{"BMI": "18.5-25", "rating": "Normal"},
 			{"BMI": "25-30", "rating": "Overweight"},
 			{"BMI": "30-35", "rating": "Moderately obese"},
-			{"BMI": "35-40 & >40", "rating": "Severely obse"},
+			{"BMI": "35-40 & >40", "rating": "Severely obese"},
 		]
 	)
 		
