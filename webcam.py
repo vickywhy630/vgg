@@ -51,12 +51,11 @@ def predict_bmi(frame):
     pred_bmi = []
     faces = faceCascade.detectMultiScale(cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY), scaleFactor = 1.15,minNeighbors = 5,minSize = (30,30))
     for (x, y, w, h) in faces:
-        cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 0, 255), 2)
+	cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 0, 255), 2)
         image = frame[y:y+h, x:x+w]
         preprocessed_img= preprocess_image(image)
-        preprocessed_img = np.expand_dims(preprocessed_img, axis=0)
+	preprocessed_img = np.expand_dims(preprocessed_img, axis=0)
 	preprocessed_img = utils.preprocess_input(preprocessed_img, version=2)
-	# Extract the embeddings using the VGGFace model
 	embeddings = custom_model.predict(preprocessed_img)
         pred_bmi.append(embeddings[0][0])
         cv2.putText(frame, f'BMI: {preds}', (x+5, y-5), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
