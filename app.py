@@ -143,7 +143,7 @@ elif choose == "Upload a Photo":
 		opencv_image = Image.open('img_0.jpg')
 		st.image(opencv_image, caption='Default Image', use_column_width=True)
 		if st.button('Recognize Faces'):
-			preprocessed_img3 = preprocess_image2(opencv_image)
+			preprocessed_img3 = preprocess_image(opencv_image)
 			preprocessed_img3 = np.expand_dims(preprocessed_img3, axis=0)
 			preprocessed_img3 = utils.preprocess_input(preprocessed_img3, version=2)
 			# Extract the embeddings using the VGGFace model
