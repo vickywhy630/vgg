@@ -73,7 +73,7 @@ class VideoProcessor:
         frm = frame.to_ndarray(format='bgr24')
         pred_bmi, frame_with_bmi = predict_bmi(frm)
         with self.frame_lock:
-            #elf.out_image = frame_with_bmi
+            self.out_image = frame_with_bmi
             self.pred_bmi = pred_bmi
 
         return av.VideoFrame.from_ndarray(frame_with_bmi, format='bgr24') 
