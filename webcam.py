@@ -8,6 +8,13 @@ from streamlit_webrtc import webrtc_streamer, WebRtcMode, VideoTransformerBase
         #img = process(img)
         #return av.VideoFrame.from_ndarray(img, format="bgr24")
         
+def preprocess_image(image):
+    image = cv2.resize(image, (224, 224))  # Resize the image to match the input size of VGGFace
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)  # Convert image to RGB format
+    image = np.array(image).astype('float64')  # Convert image to array
+    #image = preprocess_input(image)
+    return image
+        
         
 faceCascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
         
@@ -17,9 +24,7 @@ def predict_bmi(frame):
     for (x, y, w, h) in faces:
         cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 0, 255), 2)
         image = frame[y:y+h, x:x+w]
-        img = image.copy()
-        img = cv2.resize(img, (224, 224))
-        img = np.array(img).astype(np.float64)
+        img = preprocess_image(image)
         features = get_fc6_feature(img)
         preds = svr_model.predict(features)
         pred_bmi.append(preds[0])
