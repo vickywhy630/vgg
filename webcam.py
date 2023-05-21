@@ -1,5 +1,5 @@
 import av
-from sample_utils.turn import get_ice_servers
+from turn import get_ice_servers
 from streamlit_webrtc import webrtc_streamer, WebRtcMode, VideoTransformerBase
 
 class VideoProcessor:
