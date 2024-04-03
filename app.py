@@ -36,9 +36,8 @@ def pearson_correlation(y_true,y_pred):
 def custom_object_scope(custom_objects):
     return keras_utils.CustomObjectScope(custom_objects)
 
-# Usage example:
+
 with custom_object_scope({'pearson_correlation': pearson_correlation}):
-    # Your code here
     custom_model = load_model('vgg_model.h5')
 # Register the custom metric function in the custom object scope
 #with custom_object_scope({'pearson_correlation': pearson_correlation}):
